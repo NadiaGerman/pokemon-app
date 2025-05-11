@@ -1,6 +1,10 @@
 from utils import get_random_pokemon_name
 from api import fetch_pokemon_data
 from db import save_to_json  #  new import
+from ui import display_pokemon_by_name
+
+# Example test
+display_pokemon_by_name("pikachu")
 
 def main():
     pokemon_name = get_random_pokemon_name()
@@ -20,3 +24,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
