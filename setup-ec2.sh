@@ -1,34 +1,72 @@
 #!/bin/bash
 
-EC2_HOST="44.247.225.39"
-PEM_FILE="~/Downloads/myLabKey.pem"
-REPO_SSH="git@github.com:NadiaGerman/pokemon-api-app.git" # <- make sure this is correct
-APP_DIR="pokemon-api-app"
-ENTRY_FILE="main.py"  # Change this if your app runs from another file
+EC2_PUBLIC_IP="44.247.225.39"
+SSH_KEY="~/.ssh/myLabKey.pem"
+REPO_URL="https://github.com/NadiaGerman/pokemon-app.git"
+APP_DIR="pokemon-app"
 
-echo "Connecting to EC2 instance at $EC2_HOST..."
+echo "Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 
-ssh -o StrictHostKeyChecking=no -i $PEM_FILE ec2-user@$EC2_HOST << EOF
+ssh -i $SSH_KEY -t ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
 
-echo "Updating and installing dependencies..."
+echo "----------------------------"
+echo "🔧 Updating system packages"
+echo "----------------------------"
 sudo yum update -y
 sudo yum install -y git python3
 
-echo "Cloning your GitHub repo using SSH..."
-rm -rf $APP_DIR
-git clone $REPO_SSH
+echo "----------------------------"
+echo "📁 Cloning GitHub Repository"
+echo "----------------------------"
+rm -rf pokemon-app
+git clone https://github.com/NadiaGerman/pokemon-app.git
 
-echo "Creating and activating virtual environment..."
-cd $APP_DIR
+echo "----------------------------"
+echo "🐍 Setting up Virtual Environment"
+echo "----------------------------"
+cd pokemon-app
 python3 -m venv venv
 source venv/bin/activate
 
-echo "Installing requirements..."
+echo "----------------------------"
+echo "📦 Installing Python Requirements"
+echo "----------------------------"
 pip install --upgrade pip
 pip install -r requirements.txt
 
-echo "Running the Pokémon app in background..."
-nohup python3 $ENTRY_FILE > app.log 2>&1 &
+# ===============================
+# ✅ SHOW MENU
+# ===============================
+while true; do
+  echo ""
+  echo "🚀 Pokémon App - What would you like to do?"
+  echo "1. Start the App"
+  echo "2. Show Files"
+  echo "3. Show Python Version"
+  echo "4. Exit"
+  read -p "Enter choice [1-4]: " choice
 
-echo " App is deployed and running on EC2."
-EOF
+  case \$choice in
+    1)
+      echo "🟢 Starting the Pokémon App..."
+      python3 main.py
+      ;;
+    2)
+      echo "📂 Listing files in project directory:"
+      ls -l
+      ;;
+    3)
+      echo "🐍 Python version:"
+      python3 --version
+      ;;
+    4)
+      echo "👋 Exiting. Goodbye!"
+      break
+      ;;
+    *)
+      echo "❌ Invalid choice. Please choose 1-4."
+      ;;
+  esac
+done
+
+ENDSSH

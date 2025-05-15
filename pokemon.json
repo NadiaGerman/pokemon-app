@@ -197,5 +197,80 @@
       "ground",
       "steel"
     ]
+  },
+  {
+    "id": 925,
+    "name": "maushold-family-of-four",
+    "height": 3,
+    "weight": 23,
+    "types": [
+      "normal"
+    ]
+  },
+  {
+    "id": 857,
+    "name": "hattrem",
+    "height": 6,
+    "weight": 48,
+    "types": [
+      "psychic"
+    ]
+  },
+  {
+    "id": 142,
+    "name": "aerodactyl",
+    "height": 18,
+    "weight": 590,
+    "types": [
+      "rock",
+      "flying"
+    ]
+  },
+  {
+    "id": 298,
+    "name": "azurill",
+    "height": 2,
+    "weight": 20,
+    "types": [
+      "normal",
+      "fairy"
+    ]
+  },
+  {
+    "id": 143,
+    "name": "snorlax",
+    "height": 21,
+    "weight": 4600,
+    "types": [
+      "normal"
+    ]
+  },
+  {
+    "id": 829,
+    "name": "gossifleur",
+    "height": 4,
+    "weight": 22,
+    "types": [
+      "grass"
+    ]
+  },
+  {
+    "id": 642,
+    "name": "thundurus-incarnate",
+    "height": 15,
+    "weight": 610,
+    "types": [
+      "electric",
+      "flying"
+    ]
+  },
+  {
+    "id": 368,
+    "name": "gorebyss",
+    "height": 18,
+    "weight": 226,
+    "types": [
+      "water"
+    ]
   }
 ]
