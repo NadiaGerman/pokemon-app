@@ -1,36 +1,25 @@
-def display_pokemon(pokemon):
+from db import load_from_json
+
+def display_pokemon(pokemon: dict):
     print("\n Pokémon Details")
-    print(f"Name: {pokemon['name'].capitalize()}")
+    print(f"Name: {pokemon['name'].title()}")
     print(f"ID: {pokemon['id']}")
     print(f"Height: {pokemon['height']}")
     print(f"Weight: {pokemon['weight']}")
-    types = ', '.join([t['type']['name'] for t in pokemon['types']])
-    print(f"Types: {types}")
+    print(f"Types: {', '.join(pokemon['types'])}")
 
-
-def search_pokemon(name: str):
-    import json
-    import os
-
-    db_file = "pokemon.json"
-    name = name.lower()
-
-    if not os.path.exists(db_file):
-        print(" Database file not found.")
-        return
-
-    with open(db_file, "r") as file:
-        try:
-            data = json.load(file)
-        except json.JSONDecodeError:
-            print(" Failed to read JSON data.")
-            return
-
-    matches = [p for p in data if p["name"] == name]
-
-    if matches:
-        print(f"\n Found {len(matches)} match(es):")
-        for p in matches:
+def search_pokemon_by_name(name: str):
+    data = load_from_json()
+    for p in data:
+        if p["name"].lower() == name.lower():
             display_pokemon(p)
-    else:
-        print(" No matching Pokémon found.")
+            return
+    print(" No matching Pokémon found.")
+
+def search_pokemon_by_id(pid: int):
+    data = load_from_json()
+    for p in data:
+        if p["id"] == pid:
+            display_pokemon(p)
+            return
+    print(" No matching Pokémon found.")

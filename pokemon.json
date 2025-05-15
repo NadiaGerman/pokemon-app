@@ -1,0 +1,134 @@
+[
+  {
+    "id": 729,
+    "name": "brionne",
+    "height": 6,
+    "weight": 175,
+    "types": [
+      "water"
+    ]
+  },
+  {
+    "id": 816,
+    "name": "sobble",
+    "height": 3,
+    "weight": 40,
+    "types": [
+      "water"
+    ]
+  },
+  {
+    "id": 307,
+    "name": "meditite",
+    "height": 6,
+    "weight": 112,
+    "types": [
+      "fighting",
+      "psychic"
+    ]
+  },
+  {
+    "id": 313,
+    "name": "volbeat",
+    "height": 7,
+    "weight": 177,
+    "types": [
+      "bug"
+    ]
+  },
+  {
+    "id": 798,
+    "name": "kartana",
+    "height": 3,
+    "weight": 1,
+    "types": [
+      "grass",
+      "steel"
+    ]
+  },
+  {
+    "id": 734,
+    "name": "yungoos",
+    "height": 4,
+    "weight": 60,
+    "types": [
+      "normal"
+    ]
+  },
+  {
+    "id": 328,
+    "name": "trapinch",
+    "height": 7,
+    "weight": 150,
+    "types": [
+      "ground"
+    ]
+  },
+  {
+    "id": 381,
+    "name": "latios",
+    "height": 20,
+    "weight": 600,
+    "types": [
+      "dragon",
+      "psychic"
+    ]
+  },
+  {
+    "id": 460,
+    "name": "abomasnow",
+    "height": 22,
+    "weight": 1355,
+    "types": [
+      "grass",
+      "ice"
+    ]
+  },
+  {
+    "id": 125,
+    "name": "electabuzz",
+    "height": 11,
+    "weight": 300,
+    "types": [
+      "electric"
+    ]
+  },
+  {
+    "id": 189,
+    "name": "jumpluff",
+    "height": 8,
+    "weight": 30,
+    "types": [
+      "grass",
+      "flying"
+    ]
+  },
+  {
+    "id": 253,
+    "name": "grovyle",
+    "height": 9,
+    "weight": 216,
+    "types": [
+      "grass"
+    ]
+  },
+  {
+    "id": 310,
+    "name": "manectric",
+    "height": 15,
+    "weight": 402,
+    "types": [
+      "electric"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "fearow",
+    "height": 12,
+    "weight": 380,
+    "types": [
+      "normal",
+      "flying"
+    ]
+  }
+]

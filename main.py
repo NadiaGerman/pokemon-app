@@ -1,27 +1,38 @@
-from utils import get_random_pokemon_name
-from api import fetch_pokemon_data
-from db import save_to_json  #  new import
-from ui import display_pokemon_by_name
+from ui import display_pokemon, search_pokemon_by_name, search_pokemon_by_id
+from utils import get_random_pokemon
+from db import save_to_json, check_file_exists
 
-# Example test
-display_pokemon_by_name("pikachu")
+def main_menu():
+    while True:
+        print("\n=== Pokémon App Menu ===")
+        print("1.  Fetch and Save a Random Pokémon")
+        print("2.  Search Pokémon by Name")
+        print("3.  Search Pokémon by ID")
+        print("4.  Exit")
 
-def main():
-    pokemon_name = get_random_pokemon_name()
-    print(f" Randomly selected Pokémon: {pokemon_name}")
+        choice = input("Enter your choice (1-4): ")
 
-    data = fetch_pokemon_data(pokemon_name)
-    if data:
-        print(f" Pokémon ID: {data['id']}")
-        print(f" Name: {data['name']}")
-        print(f" Height: {data['height']}")
-        print(f" Weight: {data['weight']}")
-        print(f" Types: {[t['type']['name'] for t in data['types']]}")
-        
-        save_to_json(data)  # save to pokemon.json
-    else:
-        print("Failed to fetch Pokémon data.")
+        if choice == '1':
+            pokemon = get_random_pokemon()
+            if pokemon:
+                display_pokemon(pokemon)
+                save_to_json(pokemon)
+            else:
+                print(" Failed to fetch Pokémon.")
+        elif choice == '2':
+            name = input("Enter Pokémon name to search: ").lower()
+            search_pokemon_by_name(name)
+        elif choice == '3':
+            try:
+                pid = int(input("Enter Pokémon ID to search: "))
+                search_pokemon_by_id(pid)
+            except ValueError:
+                print(" Please enter a valid number.")
+        elif choice == '4':
+            print(" Goodbye!")
+            break
+        else:
+            print(" Invalid choice. Please enter a number from 1 to 4.")
 
 if __name__ == "__main__":
-    main()
-
+    main_menu()
