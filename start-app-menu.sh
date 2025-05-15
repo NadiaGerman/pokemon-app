@@ -7,9 +7,10 @@ while true; do
   echo "2. Show Files"
   echo "3. Show Python Version"
   echo "4. Exit"
-  read -rp "Enter choice [1-4]: " choice
+  echo -n "Enter choice [1-4]: "
+  read choice
 
-  case "$choice" in
+  case $choice in
     1)
       echo " Starting the Pokémon App..."
       source venv/bin/activate
