@@ -15,4 +15,12 @@ def fetch_pokemon_data(name: str) -> dict:
         }
     except requests.RequestException as e:
         print(f" Error fetching data for {name}: {e}")
-        return None
+        return {
+    "id": None,
+    "name": name,
+    "height": None,
+    "weight": None,
+    "types": []
+}
+
+    

@@ -272,5 +272,15 @@
     "types": [
       "water"
     ]
+  },
+  {
+    "id": 183,
+    "name": "marill",
+    "height": 4,
+    "weight": 85,
+    "types": [
+      "water",
+      "fairy"
+    ]
   }
 ]
