@@ -10,18 +10,15 @@ fi
 
 chmod 400 "$KEY_PATH"
 
-echo " Connecting to EC2 instance at $EC2_PUBLIC_IP..."
-ssh -i "$KEY_PATH" ec2-user@$EC2_PUBLIC_IP
+echo "🔗 Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 ssh -i "$KEY_PATH" ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
 
 echo "----------------------------"
 echo "📦 Running the Pokémon App Menu"
 echo "----------------------------"
 
-cd pokemon-app
+cd pokemon-app || { echo " Directory 'pokemon-app' not found"; exit 1; }
 chmod +x start-app-menu.sh
 ./start-app-menu.sh
 
 ENDSSH
-
-
