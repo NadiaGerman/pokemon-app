@@ -24,7 +24,7 @@ fi
 
 cd pokemon-app || { echo " Failed to enter repo folder"; exit 1; }
 
-chmod 777 start-app-menu.sh
+chmod +x start-app-menu.sh
 ./start-app-menu.sh
 
 ENDSSH
