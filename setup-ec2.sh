@@ -14,11 +14,13 @@ echo " Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 ssh -t -i "$KEY_PATH" ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
 
 echo "----------------------------"
-echo "📦 Running the Pokémon App Menu"
+echo " Running the Pokémon App Menu"
 echo "----------------------------"
 
 cd pokemon-app || { echo " Directory pokemon-app not found"; exit 1; }
-chmod +x start-app-menu.sh
-./start-app-menu.sh
+chmod 777 start-app-menu.sh
+
+#  RUN IT IN A REAL INTERACTIVE SHELL
+bash --login -i start-app-menu.sh
 
 ENDSSH
