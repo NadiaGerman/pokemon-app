@@ -1,13 +1,13 @@
 #!/bin/bash
 
 EC2_PUBLIC_IP="44.247.225.39"
-SSH_KEY="~/.ssh/myLabKey.pem"
 REPO_URL="https://github.com/NadiaGerman/pokemon-app.git"
 APP_DIR="pokemon-app"
+KEY_PATH="$HOME/.ssh/myLabKey.pem"
 
 echo "Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 
-ssh -i $SSH_KEY -t ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
+ssh -i "$KEY_PATH" -t ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
 
 echo "----------------------------"
 echo "🔧 Updating system packages"
@@ -46,7 +46,7 @@ while true; do
   echo "4. Exit"
   read -p "Enter choice [1-4]: " choice
 
-  case \$choice in
+  case $choice in
     1)
       echo "🟢 Starting the Pokémon App..."
       python3 main.py
