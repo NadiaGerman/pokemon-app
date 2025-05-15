@@ -1,6 +1,6 @@
 from ui import display_pokemon, search_pokemon_by_name, search_pokemon_by_id
 from utils import get_random_pokemon
-from db import save_to_json, check_file_exists
+from db import save_to_json
 
 def main_menu():
     while True:

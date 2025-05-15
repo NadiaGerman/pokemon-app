@@ -130,5 +130,72 @@
       "normal",
       "flying"
     ]
+  },
+  {
+    "id": 566,
+    "name": "archen",
+    "height": 5,
+    "weight": 95,
+    "types": [
+      "rock",
+      "flying"
+    ]
+  },
+  {
+    "id": 726,
+    "name": "torracat",
+    "height": 7,
+    "weight": 250,
+    "types": [
+      "fire"
+    ]
+  },
+  {
+    "id": 468,
+    "name": "togekiss",
+    "height": 15,
+    "weight": 380,
+    "types": [
+      "fairy",
+      "flying"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "clefable",
+    "height": 13,
+    "weight": 400,
+    "types": [
+      "fairy"
+    ]
+  },
+  {
+    "id": 567,
+    "name": "archeops",
+    "height": 14,
+    "weight": 320,
+    "types": [
+      "rock",
+      "flying"
+    ]
+  },
+  {
+    "id": 58,
+    "name": "growlithe",
+    "height": 7,
+    "weight": 190,
+    "types": [
+      "fire"
+    ]
+  },
+  {
+    "id": 530,
+    "name": "excadrill",
+    "height": 7,
+    "weight": 404,
+    "types": [
+      "ground",
+      "steel"
+    ]
   }
 ]
