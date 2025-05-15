@@ -14,13 +14,12 @@ echo " Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 ssh -i "$KEY_PATH" ec2-user@$EC2_PUBLIC_IP << 'ENDSSH'
 
 echo "----------------------------"
-echo " Running the Pokémon App Menu"
+echo "📦 Running the Pokémon App Menu"
 echo "----------------------------"
 
-# Ensure repo exists
-if [ ! -d "pokemon-app" ]; then
-  git clone https://github.com/NadiaGerman/pokemon-app.git
-fi
+# Always fetch latest
+rm -rf pokemon-app
+git clone https://github.com/NadiaGerman/pokemon-app.git
 
 cd pokemon-app || { echo " Failed to enter repo folder"; exit 1; }
 
