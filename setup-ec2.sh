@@ -3,7 +3,7 @@
 EC2_PUBLIC_IP="44.247.225.39"
 REPO_URL="https://github.com/NadiaGerman/pokemon-app.git"
 APP_DIR="pokemon-app"
-KEY_PATH="$HOME/.ssh/myLabKey.pem"
+KEY_PATH="$HOME/Downloads/myLabKey.pem"
 
 echo "Connecting to EC2 instance at $EC2_PUBLIC_IP..."
 
@@ -33,6 +33,15 @@ echo "📦 Installing Python Requirements"
 echo "----------------------------"
 pip install --upgrade pip
 pip install -r requirements.txt
+
+# ===============================
+# ✅ Ask before showing menu
+# ===============================
+read -p "🎮 Do you want to play the Pokémon app? (y/n): " play
+if [[ "$play" != "y" ]]; then
+  echo "👋 Exiting. Maybe next time!"
+  exit 0
+fi
 
 # ===============================
 # ✅ SHOW MENU
