@@ -282,5 +282,42 @@
       "water",
       "fairy"
     ]
+  },
+  {
+    "id": 198,
+    "name": "murkrow",
+    "height": 5,
+    "weight": 21,
+    "types": [
+      "dark",
+      "flying"
+    ]
+  },
+  {
+    "id": 744,
+    "name": "rockruff",
+    "height": 5,
+    "weight": 92,
+    "types": [
+      "rock"
+    ]
+  },
+  {
+    "id": 855,
+    "name": "polteageist",
+    "height": 2,
+    "weight": 4,
+    "types": [
+      "ghost"
+    ]
+  },
+  {
+    "id": 132,
+    "name": "ditto",
+    "height": 3,
+    "weight": 40,
+    "types": [
+      "normal"
+    ]
   }
 ]
