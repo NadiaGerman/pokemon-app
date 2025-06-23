@@ -1,0 +1,7 @@
+.terraform/
+.venv/
+__pycache__/
+*.pyc
+.env
+pokemon.json
+
