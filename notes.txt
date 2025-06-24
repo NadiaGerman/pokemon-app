@@ -1,0 +1,2 @@
+zip -r pokemon-app.zip pokemon-app \
+  -x "*.pyc" "*.DS_Store" "*.terraform*" "*.venv*" "__pycache__/*"

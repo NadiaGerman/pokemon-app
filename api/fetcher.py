@@ -1,9 +1,10 @@
 import requests
 
-def fetch_pokemon_data(name: str) -> dict:
-    url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
+BASE_URL = "https://pokeapi.co/api/v2/pokemon/"
+
+def fetch_pokemon(pokemon_id):
     try:
-        response = requests.get(url)
+        response = requests.get(f"{BASE_URL}{pokemon_id}", verify=False, timeout=5)
         response.raise_for_status()
         data = response.json()
         return {
@@ -13,14 +14,6 @@ def fetch_pokemon_data(name: str) -> dict:
             "weight": data["weight"],
             "types": [t["type"]["name"] for t in data["types"]]
         }
-    except requests.RequestException as e:
-        print(f" Error fetching data for {name}: {e}")
-        return {
-    "id": None,
-    "name": name,
-    "height": None,
-    "weight": None,
-    "types": []
-}
-
-    
+    except Exception as e:
+        print(f"Error fetching Pokémon: {e}")
+        return None
