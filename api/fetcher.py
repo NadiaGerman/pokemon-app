@@ -5,7 +5,7 @@ BASE_URL = "https://pokeapi.co/api/v2/pokemon/"
 
 def fetch_pokemon(pokemon_id):
     try:
-        response = requests.get(f"{BASE_URL}{pokemon_id}", verify=False, timeout=5)
+        response = requests.get(f"{BASE_URL}{pokemon_id}", timeout=5)
         response.raise_for_status()
         data = response.json()
         return {

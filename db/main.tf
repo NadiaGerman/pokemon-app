@@ -1,6 +1,6 @@
 // File: db/main.tf
 resource "aws_dynamodb_table" "pokemon_table" {
-  name           = var.table_name
+  name           = "pokemon-app-table"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "id"
 
@@ -10,7 +10,7 @@ resource "aws_dynamodb_table" "pokemon_table" {
   }
 
   tags = {
-    Environment = var.environment
-    Name        = var.table_name
+    Environment = "dev"
+    Name        = "pokemon-app-table"
   }
 }

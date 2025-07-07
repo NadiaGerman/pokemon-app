@@ -1,21 +1,7 @@
-## File: ui/menu.py
-# --- a/file:///Users/user/Desktop/projects/pokemon-app/ui/menu.py
-import os
-from dotenv import load_dotenv
-from core.draw import draw_random_pokemon
+# ui/menu.py
 
-load_dotenv()
-
-DB_TYPE = os.getenv("DB_TYPE", "local")
-
-# Dynamically import the correct DB interface
-if DB_TYPE == "mongodb":
-    from db.mongodb import search_by_name, search_by_id
-elif DB_TYPE == "dynamodb":
-    print("⚠️ DynamoDB integration not available yet.")
-    exit()
-else:
-    from db.local_db import search_by_name, search_by_id
+from db import search_by_name, search_by_id  # <--- Now always correct backend!
+from battle.draw import draw_random_pokemon
 
 def main_menu():
     while True:
@@ -29,7 +15,6 @@ def main_menu():
 
         if choice == "1":
             draw_random_pokemon()
-
         elif choice == "2":
             name = input("Enter Pokémon name: ").strip()
             result = search_by_name(name)
@@ -38,7 +23,6 @@ def main_menu():
                 print(result)
             else:
                 print("Not found.")
-
         elif choice == "3":
             pid = input("Enter Pokémon ID: ").strip()
             if pid.isdigit():
@@ -50,10 +34,8 @@ def main_menu():
                     print("Not found.")
             else:
                 print("ID must be a number.")
-
         elif choice == "4":
             print("Goodbye!")
             break
-
         else:
             print("Invalid choice. Try again.")
