@@ -10,45 +10,33 @@ MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 DB_NAME = os.getenv("MONGO_DB_NAME", "pokemon_db")
 COLLECTION_NAME = os.getenv("MONGO_COLLECTION", "pokemon")
 
+if not MONGO_URI:
+    raise ValueError("MONGO_URI environment variable is not set.")
+if not DB_NAME:
+    raise ValueError("MONGO_DB_NAME environment variable is not set.")
+if not COLLECTION_NAME:
+    raise ValueError("MONGO_COLLECTION environment variable is not set.")
+
 client = MongoClient(MONGO_URI)
 try:
     client.admin.command("ping")
-except ConnectionFailure:
-    print(" MongoDB connection failed.")
+except ConnectionFailure as e:
+    print(f"MongoDB connection failed: {e}")
     raise
 
 db = client[DB_NAME]
 collection = db[COLLECTION_NAME]
 
-
-def insert_pokemon(pokemon: dict):
-    if collection.find_one({"id": pokemon["id"]}):
-        print(f"{pokemon['name']} already exists in MongoDB.")
-        return
-    collection.insert_one(pokemon)
-    print(f"{pokemon['name']} added to MongoDB.")
-
-
 def search_by_name(name: str):
-    name = name.lower()
-    result = collection.find_one({"name": name})
-    print(result if result else "Not found.")
-
+    try:
+        return collection.find_one({"name": name.lower()})
+    except Exception as e:
+        print(f"Error searching by name: {e}")
+        return None
 
 def search_by_id(pid: int):
-    result = collection.find_one({"id": pid})
-    print(result if result else "Not found.")
-
-
-def preload_from_json(json_file="pokemon.json"):
-    if collection.count_documents({}) > 0:
-        print("MongoDB already populated.")
-        return
-
     try:
-        with open(json_file, "r") as f:
-            data = json.load(f)
-            collection.insert_many(data)
-            print(f"Preloaded {len(data)} Pokémon from {json_file} into MongoDB.")
+        return collection.find_one({"id": pid})
     except Exception as e:
-        print(f"Failed to preload data: {e}")
+        print(f"Error searching by ID: {e}")
+        return None

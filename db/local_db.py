@@ -11,10 +11,8 @@ def _load_db():
 
 def search_by_name(name: str):
     db = _load_db()
-    result = next((p for p in db if p["name"].lower() == name.lower()), None)
-    return result
+    return next((p for p in db if p["name"].lower() == name.lower()), None)
 
 def search_by_id(pid: int):
     db = _load_db()
-    result = next((p for p in db if p["id"] == pid), None)
-    return result
+    return next((p for p in db if p["id"] == pid), None)

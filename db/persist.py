@@ -1,7 +1,7 @@
 import json
 import os
 
-DB_FILE = "pokemon.json"
+DB_FILE = "pokemon_full_gen1.json"
 
 def _load_db():
     if os.path.exists(DB_FILE):
