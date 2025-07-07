@@ -1,12 +1,17 @@
-.venv/
-.terraform/
+# Python
 __pycache__/
 *.pyc
+
+# Virtual environment
+.venv/
+
+# Environment files & local data
 .env
 .env.*
 pokemon.json
 
-# Terraform state and secrets
+# Terraform
+.terraform/
 *.tfstate
 *.tfstate.*
 .crash
@@ -17,6 +22,3 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
-
-**/__pycache__/
-*.pyc
