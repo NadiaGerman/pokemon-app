@@ -1,44 +1,56 @@
 # db/dynamodb.py
-
-import os
 import boto3
+import os
+from boto3.dynamodb.conditions import Attr
 from dotenv import load_dotenv
 
 load_dotenv()
 
-TABLE_NAME = os.getenv("DYNAMODB_TABLE", "pokemon-app-table")
-REGION = os.getenv("AWS_REGION", "us-west-2")  # <-- Fix: Should be AWS_REGION not AWS_ \ "REGION"
+AWS_REGION = os.getenv("AWS_REGION", "us-west-2")
+DYNAMO_TABLE = os.getenv("DYNAMO_TABLE", "pokemon")
 
-dynamodb = boto3.resource("dynamodb", region_name=REGION)
-table = dynamodb.Table(TABLE_NAME) # type: ignore
+try:
+    dynamodb = boto3.resource("dynamodb", region_name=AWS_REGION)
+    table = dynamodb.Table(DYNAMO_TABLE)
+except Exception as e:
+    print(f"[ERROR] DynamoDB connection failed: {e}")
+    raise
 
-def insert_pokemon(pokemon: dict) -> None:
-    """Insert a Pokémon record into DynamoDB."""
-    try:
-        table.put_item(Item=pokemon)
-        print(f"✅ Inserted Pokémon: {pokemon['name']}")
-    except Exception as e:
-        print(f"❌ Error inserting Pokémon: {e}")
+def insert_pokemon(pokemon):
+    """
+    Insert a Pokémon dict into DynamoDB.
+    pokemon = {
+        "id": int,
+        "name": str,
+        "types": [str, ...],
+        "base_experience": int
+    }
+    """
+    table.put_item(Item={
+        "id": int(pokemon["id"]),
+        "name": pokemon["name"],
+        "types": pokemon.get("types", []),
+        "base_experience": int(pokemon.get("base_experience", 0))
+    })
 
-def search_by_name(name: str) -> dict | None:
-    """Search for a Pokémon by name (case-insensitive)."""
-    try:
-        response = table.scan(
-            FilterExpression="contains (#name, :name)",
-            ExpressionAttributeNames={"#name": "name"},
-            ExpressionAttributeValues={":name": name.lower()}
-        )
-        items = response.get("Items", [])
-        return items[0] if items else None
-    except Exception as e:
-        print(f"❌ Error searching by name: {e}")
-        return None
+def search_by_id(pokemon_id):
+    """Fetch Pokémon by ID (int)."""
+    resp = table.get_item(Key={"id": int(pokemon_id)})
+    return resp.get("Item")
 
-def search_by_id(pid: int) -> dict | None:
-    """Search for a Pokémon by ID."""
-    try:
-        response = table.get_item(Key={"id": pid})
-        return response.get("Item", None)
-    except Exception as e:
-        print(f"❌ Error searching by ID: {e}")
-        return None
+def search_by_name(name):
+    """Fetch Pokémon by name (str)."""
+    resp = table.scan(
+        FilterExpression=Attr("name").eq(name)
+    )
+    items = resp.get("Items", [])
+    return items[0] if items else None
+
+def get_all_pokemon(limit=20):
+    """Get up to `limit` Pokémon."""
+    resp = table.scan(Limit=limit)
+    return resp.get("Items", [])
+
+def delete_pokemon(pokemon_id):
+    """Delete a Pokémon by ID."""
+    table.delete_item(Key={"id": int(pokemon_id)})
