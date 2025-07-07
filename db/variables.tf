@@ -1,3 +1,5 @@
+// File: db/variables.tf
+# --- a/file:///Users/user/Desktop/projects/pokemon-app/db/variables.tf
 variable "table_name" {
   description = "Name of the DynamoDB table"
   type        = string

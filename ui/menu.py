@@ -1,3 +1,5 @@
+## File: ui/menu.py
+# --- a/file:///Users/user/Desktop/projects/pokemon-app/ui/menu.py
 import os
 from dotenv import load_dotenv
 from core.draw import draw_random_pokemon

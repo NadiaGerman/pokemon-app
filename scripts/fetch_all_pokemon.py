@@ -1,3 +1,5 @@
+## File: scripts/fetch_all_pokemon.py
+# --- a/file:///Users/user/Desktop/projects/pokemon-app/scripts/fetch_all_pokemon.py
 import requests
 import json
 from time import sleep
