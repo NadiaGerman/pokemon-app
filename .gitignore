@@ -3,4 +3,17 @@
 __pycache__/
 *.pyc
 .env
+.env.*
 pokemon.json
+
+# Terraform state and secrets
+*.tfstate
+*.tfstate.*
+.crash
+terraform.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
