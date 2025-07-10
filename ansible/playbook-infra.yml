@@ -1,0 +1,105 @@
+---
+- name: Provision EC2 and configure instance
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  collections:
+    - amazon.aws
+  vars:
+    aws_region: us-west-2
+    instance_type: t2.micro
+    key_name: labsuser-7
+    security_group_name: pokemon-app-sg
+    app_port: 8080
+    ami_id: ami-08bfb3ff75119bd97 
+  tasks:
+    - name: Create security group for SSH and app port
+      amazon.aws.ec2_security_group:
+        name: "{{ security_group_name }}"
+        description: Security group for Pokemon app
+        region: "{{ aws_region }}"
+        rules:
+          - proto: tcp
+            ports:
+              - 22
+              - "{{ app_port }}"
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
+      register: sg
+
+    - name: Launch EC2 instance
+      amazon.aws.ec2_instance:
+        key_name: "{{ key_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami_id }}"
+        wait: yes
+        region: "{{ aws_region }}"
+        security_groups:
+          - "{{ sg.group_id }}"
+        count: 1
+        tags:
+          Name: PokemonAppInstance
+      register: ec2
+
+    - name: Wait for SSH to come up
+      ansible.builtin.wait_for:
+        host: "{{ ec2.instances[0].public_ip_address }}"
+        port: 22
+        timeout: 300
+        state: started
+
+    - name: Add new instance to host group
+      add_host:
+        name: "{{ ec2.instances[0].public_ip_address }}"
+        groups: ec2_instances
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file: ~/Downloads/labsuser-7.pem
+
+- name: Configure EC2 instance
+  hosts: ec2_instances
+  gather_facts: yes
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.8
+  tasks:
+    - name: Install Python 3.8
+      ansible.builtin.yum:
+        name: python38
+        state: present
+
+    - name: Update all packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+
+    - name: Install Docker and Python3
+      ansible.builtin.yum:
+        name:
+          - docker
+          - python3
+        state: present
+
+    - name: Start and enable Docker
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add ec2-user to docker group
+      ansible.builtin.user:
+        name: ec2-user
+        groups: docker
+        append: yes
+
+    - name: Copy setup-ec2.sh script to instance
+      ansible.builtin.copy:
+        src: ../scripts/setup-ec2.sh
+        dest: /home/ec2-user/setup-ec2.sh
+        mode: '0755'
+
+    - name: Run setup-ec2.sh script
+      ansible.builtin.shell: /home/ec2-user/setup-ec2.sh
+      args:
+        chdir: /home/ec2-user
