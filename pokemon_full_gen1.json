@@ -64,5 +64,155 @@
     "types": [
       "psychic"
     ]
+  },
+  {
+    "id": 69,
+    "name": "bellsprout",
+    "height": 7,
+    "weight": 40,
+    "types": [
+      "grass",
+      "poison"
+    ]
+  },
+  {
+    "id": 117,
+    "name": "seadra",
+    "height": 12,
+    "weight": 250,
+    "types": [
+      "water"
+    ]
+  },
+  {
+    "id": 34,
+    "name": "nidoking",
+    "height": 14,
+    "weight": 620,
+    "types": [
+      "poison",
+      "ground"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "ivysaur",
+    "height": 10,
+    "weight": 130,
+    "types": [
+      "grass",
+      "poison"
+    ]
+  },
+  {
+    "id": 89,
+    "name": "muk",
+    "height": 12,
+    "weight": 300,
+    "types": [
+      "poison"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "pidgeotto",
+    "height": 11,
+    "weight": 300,
+    "types": [
+      "normal",
+      "flying"
+    ]
+  },
+  {
+    "id": 120,
+    "name": "staryu",
+    "height": 8,
+    "weight": 345,
+    "types": [
+      "water"
+    ]
+  },
+  {
+    "id": 56,
+    "name": "mankey",
+    "height": 5,
+    "weight": 280,
+    "types": [
+      "fighting"
+    ]
+  },
+  {
+    "id": 65,
+    "name": "alakazam",
+    "height": 15,
+    "weight": 480,
+    "types": [
+      "psychic"
+    ]
+  },
+  {
+    "id": 143,
+    "name": "snorlax",
+    "height": 21,
+    "weight": 4600,
+    "types": [
+      "normal"
+    ]
+  },
+  {
+    "id": 62,
+    "name": "poliwrath",
+    "height": 13,
+    "weight": 540,
+    "types": [
+      "water",
+      "fighting"
+    ]
+  },
+  {
+    "id": 128,
+    "name": "tauros",
+    "height": 14,
+    "weight": 884,
+    "types": [
+      "normal"
+    ]
+  },
+  {
+    "id": 122,
+    "name": "mr-mime",
+    "height": 13,
+    "weight": 545,
+    "types": [
+      "psychic",
+      "fairy"
+    ]
+  },
+  {
+    "id": 77,
+    "name": "ponyta",
+    "height": 10,
+    "weight": 300,
+    "types": [
+      "fire"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "arbok",
+    "height": 35,
+    "weight": 650,
+    "types": [
+      "poison"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "squirtle",
+    "height": 5,
+    "weight": 90,
+    "types": [
+      "water"
+    ]
   }
 ]

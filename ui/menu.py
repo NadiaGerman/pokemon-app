@@ -3,7 +3,74 @@
 from db import search_by_name, search_by_id  # <--- Now always correct backend!
 from battle.draw import draw_random_pokemon
 
+def display_pokemon_banner():
+    """Display Pokemon ASCII art banner at startup"""
+    banner = """
+    ██████╗  ██████╗ ██╗  ██╗███████╗███╗   ███╗ ██████╗ ███╗   ██╗
+    ██╔══██╗██╔═══██╗██║ ██╔╝██╔════╝████╗ ████║██╔═══██╗████╗  ██║
+    ██████╔╝██║   ██║█████╔╝ █████╗  ██╔████╔██║██║   ██║██╔██╗ ██║
+    ██╔═══╝ ██║   ██║██╔═██╗ ██╔══╝  ██║╚██╔╝██║██║   ██║██║╚██╗██║
+    ██║     ╚██████╔╝██║  ██╗███████╗██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
+    ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                                                    
+     /\\_/\\  
+    ( o.o ) 
+     > ^ <  
+    """
+    print(banner)
+
+def display_random_pokemon():
+    """Display a random Pokemon ASCII art"""
+    import random
+    
+    pokemon_art = [
+        # Pikachu
+        """
+        ⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠈⠉⠛⠓⠶⠶⠶⠶⠶⠿⠿⠿
+        ⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⡀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⢶⡿⠋⠉⠉⠉⠙⢿⡆⠀⠀⠀
+        ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢷⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠙⠿⣿⣿⣿⠿⠋⠁⠀⠀⠀
+        ⠀⠀⠀⠀⣠⣶⡿⠿⠿⠿⣶⣄⠀⠀⠀⠀
+        ⠀⠀⠀⠰⠿⠃⠀⠀⠀⠀⠈⠿⠷⠀⠀⠀
+        """,
+        # Bulbasaur
+        """
+        ⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣶⣶⣶⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀
+        ⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀
+        ⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀
+        ⠀⣿⣿⣿⡿⠟⠋⠉⠉⠛⠻⢿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠙⠻⣿⣷⠀
+        ⢰⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠙⠻⠟⠋⠀⠀⠀⠀⠀⠀⣰⣿⣿⣇
+        ⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿
+        ⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿
+        ⢿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⡿
+        """,
+        # Charmander
+        """
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀
+        ⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀
+        ⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄
+        ⢰⣿⣿⣿⣿⡿⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇
+        ⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+        ⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+        ⢹⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⡏
+        ⠘⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⠟⠀
+        """
+    ]
+    
+    import random
+    print(random.choice(pokemon_art))
+
 def main_menu():
+    # Display Pokemon ASCII art at startup - ADD THIS AT LINE 7
+    display_pokemon_banner()
+    display_random_pokemon()
+    
+    print("\nWelcome to the Pokémon Application!")
+    
     while True:
         print("\n=== Pokémon App Menu ===")
         print("1.  Fetch and Save a Random Pokémon")

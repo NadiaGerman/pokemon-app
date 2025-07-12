@@ -11,7 +11,7 @@
     key_name: labsuser-7
     security_group_name: pokemon-app-sg
     app_port: 8080
-    ami_id: ami-08bfb3ff75119bd97 
+    ami_id: ami-08bfb3ff75119bd97
   tasks:
     - name: Create security group for SSH and app port
       amazon.aws.ec2_security_group:
@@ -57,22 +57,28 @@
         ansible_user: ec2-user
         ansible_ssh_private_key_file: ~/Downloads/labsuser-7.pem
 
-- name: Configure EC2 instance
+- name: Bootstrap Python 3.8 with raw command
+  hosts: ec2_instances
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Enable amazon-linux-extras Python 3.8 and install
+      raw: |
+        amazon-linux-extras enable python3.8
+        yum install -y python3.8
+
+- name: Configure EC2 instance with Python 3.8
   hosts: ec2_instances
   gather_facts: yes
   become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3.8
   tasks:
-    - name: Install Python 3.8
-      ansible.builtin.yum:
-        name: python38
-        state: present
-
     - name: Update all packages
       ansible.builtin.yum:
         name: '*'
         state: latest
+        use_backend: yum
 
     - name: Install Docker and Python3
       ansible.builtin.yum:
@@ -80,6 +86,7 @@
           - docker
           - python3
         state: present
+        use_backend: yum
 
     - name: Start and enable Docker
       ansible.builtin.systemd:
