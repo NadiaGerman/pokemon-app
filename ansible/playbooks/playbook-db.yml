@@ -1,0 +1,7 @@
+---
+- name: Setup database schema and tables
+  hosts: ec2_instances
+  become: yes
+  gather_facts: yes
+  roles:
+    - database

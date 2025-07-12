@@ -1,0 +1,7 @@
+---
+- name: Deploy frontend app containers
+  hosts: ec2_instances
+  become: yes
+  gather_facts: yes
+  roles:
+    - app_deploy

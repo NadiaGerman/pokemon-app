@@ -1,0 +1,15 @@
+---
+- name: Ensure remote scripts directory exists
+  file:
+    path: /home/ec2-user/pokemon-app/scripts
+    state: directory
+    mode: '0755'
+
+- name: Copy create_dynamo_table.py script to instance
+  copy:
+    src: ../../../../scripts/create_dynamo_table.py
+    dest: /home/ec2-user/pokemon-app/scripts/create_dynamo_table.py
+    mode: '0755'
+
+- name: Run DynamoDB table creation script
+  shell: /usr/bin/python3 /home/ec2-user/pokemon-app/scripts/create_dynamo_table.py

@@ -1,0 +1,16 @@
+---
+- name: Clone project repository
+  git:
+    repo: 'https://github.com/NadiaGerman/pokemon-app.git'
+    dest: /home/ec2-user/pokemon-app
+    version: main
+
+- name: Build and start backend containers
+  docker_compose:
+    project_src: /home/ec2-user/pokemon-app/docker/backend
+    state: present
+
+- name: Build and start frontend containers
+  docker_compose:
+    project_src: /home/ec2-user/pokemon-app/docker/frontend
+    state: present
